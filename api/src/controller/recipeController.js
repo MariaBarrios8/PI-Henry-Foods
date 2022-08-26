@@ -8,7 +8,7 @@ const  {AP_KING} = process.env
 const getApiInfo = async () => {
   try {
     const url = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=10`
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=15`
     ) //en realidad son 100
 
     const dataRecipes = await url.data.results.map((e) => {
@@ -17,7 +17,7 @@ const getApiInfo = async () => {
         name: e.title,
         image: e.image,
         type: e.diets.map((e) => e).join(", "),
-        healtScore: e.healtScore,
+        healthScore: e.healthScore,
         dishTypes: e.dishTypes.join(", "),
         //steps: e.analyzedInstructions
       };
