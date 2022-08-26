@@ -1,0 +1,19 @@
+.nav {
+    display: flex;
+    flex-direction: row;
+    
+  }
+  
+  input{
+    margin-top: 2.5em;
+    height: 2em;
+    background-color: rgba(128, 128, 128, 0.655);
+    color: whitesmoke;
+  }
+    
+  button{
+    margin-top: 2.5em;
+    border: hidden;
+    background-color: grey;
+  }
+    

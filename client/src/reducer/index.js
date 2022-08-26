@@ -10,7 +10,8 @@ function rootReducer (state = initialState, action){
         case 'GET_RECIPES':
             return {
                 ...state, 
-                recipes: action.payload
+                recipes: action.payload,
+                allRecipes: action.payload
             }
         case 'ORDER_BY_NAME':
             const recipesOrder = 
@@ -39,6 +40,11 @@ function rootReducer (state = initialState, action){
         return {
             ...state,
             recipes: recipesOrder
+        }
+        case 'GET_RECIPE_NAMES': 
+        return {
+            ...state,
+            recipes: action.payload
         }
         default: 
         return state

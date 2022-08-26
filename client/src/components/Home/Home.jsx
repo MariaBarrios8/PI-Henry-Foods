@@ -1,10 +1,11 @@
 import React, { Fragment } from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getRecipes, OrderRecipesByName } from "../../actions";
+import { getRecipes, orderRecipesByName } from "../../actions";
 import { Link } from "react-router-dom";
 import Card from "../Cards/Card";
 import Paginado from "../Pagination/Paginado";
+import SearchBar from '../SearchBar/SearchBar'
 import './home.css'
 
 
@@ -54,9 +55,9 @@ export default function Home() {
   }
 
 
-  function handleSort (e) {
+  function handleSort (e) {  //orden alfabético
     e.preventDefault()
-    dispatch(OrderRecipesByName(e.target.value))
+    dispatch(orderRecipesByName(e.target.value))
     setCurrentPage(1)
     setOrder(`${e.target.value}`)
   }
@@ -92,6 +93,7 @@ export default function Home() {
         prevPage={prevPage}
         nextPage={nextPage}
         />
+        <SearchBar />
         <div className="recipeCard">
           {currentRecipes?.map((el) => {
             return (
