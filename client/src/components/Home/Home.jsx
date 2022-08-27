@@ -1,14 +1,14 @@
 import React, { Fragment } from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getRecipes, orderRecipesByName } from "../../actions";
+import { getRecipes, orderRecipesByName, orderByScore } from "../../actions";
 import { Link } from "react-router-dom";
 import Card from "../Cards/Card";
 import Paginado from "../Pagination/Paginado";
 import SearchBar from '../SearchBar/SearchBar'
 import './home.css'
 
-
+//QUEDASTE EN EL MIN 21:13 DEL REPASO DEL JUEVES
 export default function Home() {
   const dispatch = useDispatch();//A hook to access the redux dispatch function.
   const allRecipes = useSelector((state) => state.recipes); //map state to props
@@ -23,6 +23,7 @@ export default function Home() {
 
   
   const [order, setOrder] = useState("")
+  const [score, setScore] = useState("")
 
 
   const paginado = (pageNumber) => {
@@ -62,6 +63,13 @@ export default function Home() {
     setOrder(`${e.target.value}`)
   }
 
+  function handleScore(e) {   //orden por puntuaciones
+    e.preventDefault()
+    dispatch(orderByScore(e.target.value))
+    setCurrentPage(1)
+    setScore(`${e.target.value}`)
+  }
+
 
   return (
     <div>
@@ -83,8 +91,10 @@ export default function Home() {
         <select className="Diets">
           <option value="diet">Diets</option>
         </select>
-        <select className="HealtScore">
-          <option value="healt">Order by healtScore</option>
+        <select className="HealtScore" onChange={(e) => handleScore(e)}>
+          <option hidden="health">Order by healthScore</option>
+          <option value="high">Higher health scores first</option>
+          <option value="low">Lower health scores first</option>
         </select>
         <Paginado 
         recipesPerPage={recipesPerPage} 
@@ -93,7 +103,7 @@ export default function Home() {
         prevPage={prevPage}
         nextPage={nextPage}
         />
-        <SearchBar />
+        <SearchBar className='searchDiv'/> 
         <div className="recipeCard">
           {currentRecipes?.map((el) => {
             return (

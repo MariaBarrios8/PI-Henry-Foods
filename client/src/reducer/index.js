@@ -46,7 +46,23 @@ function rootReducer (state = initialState, action){
             ...state,
             recipes: action.payload
         }
-        default: 
+        case 'ORDER_BY_SCORE':
+            let scoreOrder = [...state.recipes];
+            if (action.payload === 'high') {
+                scoreOrder.sort((a, b) => {
+                    return parseInt(a.healthScore) - parseInt(b.healthScore)
+                })
+            } 
+            if (action.payload === 'low') {
+                scoreOrder.sort((a, b) => {
+                    return parseInt(b.healthScore) - parseInt(a.healthScore)
+                })
+            }
+            return {
+                ...state,
+                recipes: scoreOrder
+            }
+        default:
         return state
     }
 }
