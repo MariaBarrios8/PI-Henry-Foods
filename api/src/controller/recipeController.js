@@ -19,7 +19,7 @@ const getApiInfo = async () => {
         type: e.diets.map((e) => e).join(", "),
         healthScore: e.healthScore,
         dishTypes: e.dishTypes.join(", "),
-        //steps: e.analyzedInstructions
+        steps: e.analyzedInstructions
       };
     });
     //console.log(dataRecipes, 'WAAAAAAAAAAAA')
@@ -108,14 +108,17 @@ async function getById (req, res) {
 }
 
 
-async function postRecipe (req, res) {
+
+
+
+/*async function postRecipe (req, res) {
   let {name, summary, healtScore, steps, types, image, dishTypes} = req.body
 
   try {
     let newRecipe = await Recipe.create({
       name, 
       summary,
-      healtScore,
+      healthScore,
       steps,
       image,
       dishTypes 
@@ -147,7 +150,7 @@ async function postRecipe (req, res) {
     res.status(404).send("AAAAAAA ERROR")
   }
 }
-
+*/
 
 
 module.exports = {
@@ -156,5 +159,5 @@ module.exports = {
   getAllRecipes,
   getApiDetail,
   getById,
-  postRecipe
+  //postRecipe
 };

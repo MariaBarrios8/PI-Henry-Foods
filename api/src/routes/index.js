@@ -13,6 +13,6 @@ const {getById, postRecipe} = require('../controller/recipeController')
 router.get('/diets', dietRoute) 
 router.get('/recipes', recipeRoute)
 router.use('/recipes/:id', getById)
-router.post('/recipes', postRecipe)
+router.post('/recipes', recipeRoute)
 
 module.exports = router;
