@@ -62,6 +62,15 @@ function rootReducer (state = initialState, action){
                 ...state,
                 recipes: scoreOrder
             }
+        case 'GET_DIETS':
+            return {
+                ...state,
+                diets: action.payload
+            }
+        case 'POST_RECIPE':
+            return {
+                ...state,
+            }
         default:
         return state
     }

@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getRecipes, orderRecipesByName, orderByScore } from "../../actions";
+import { getRecipes, orderRecipesByName, orderByScore, getDiets } from "../../actions";
 import { Link } from "react-router-dom";
 import Card from "../Cards/Card";
 import Paginado from "../Pagination/Paginado";
@@ -13,6 +13,7 @@ export default function Home() {
   const dispatch = useDispatch();//A hook to access the redux dispatch function.
   const allRecipes = useSelector((state) => state.recipes); //map state to props
   //viene del reducer
+  const diets = useSelector((state) => state.diets)
 
   //paginado
   const [currentPage, setCurrentPage] = useState(1)//empiezo en la página 1
@@ -70,6 +71,11 @@ export default function Home() {
     setScore(`${e.target.value}`)
   }
 
+  function handleFilterByDiet(e) {
+    dispatch(getDiets(e.target.value))
+    setCurrentPage(1)
+  }
+
 
   return (
     <div>
@@ -89,7 +95,11 @@ export default function Home() {
           <option value="des">Z - A order</option>
         </select>
         <select className="Diets">
-          <option value="diet">Diets</option>
+        <option hidden="noOrder">Diets types</option>
+          <option value="allDiets">any diet</option>
+          {diets.map((e) => {
+            <option key={e.id} value={e.name}>{e.name}</option>
+          })}
         </select>
         <select className="HealtScore" onChange={(e) => handleScore(e)}>
           <option hidden="health">Order by healthScore</option>
@@ -125,3 +135,6 @@ export default function Home() {
     </div>
   );
 }
+
+
+// el.image ? el.image : <img src= 'url....'/>
